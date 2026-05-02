@@ -512,5 +512,59 @@
   loadAnnouncements();
   setInterval(() => { loadQuestions(); loadAnnouncements(); }, 50000);
 </script>
+
+<!-- Floating Circular Buttons (Telegram & WhatsApp) -->
+<style>
+  /* Floating button container base styles */
+  .floating-social-btn {
+    position: fixed;
+    width: 55px;
+    height: 55px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 9999;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  
+  .floating-social-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  }
+  
+  .floating-social-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+  
+  /* Telegram button (bottom: 20px, right: 20px) */
+  .telegram-float {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  /* WhatsApp button (bottom: 80px, right: 20px) */
+  .whatsapp-float {
+    bottom: 80px;
+    right: 20px;
+  }
+</style>
+
+<a href="https://t.me/itz_ovi1" class="floating-social-btn telegram-float" target="_blank" rel="noopener noreferrer">
+  <img src="https://i.ibb.co.com/GrS9Zf1/PLPL-Lite-2026-05-01-225753.png" alt="Telegram">
+</a>
+
+<a href="https://wa.me/message/A5BTDDK3ETGFG1" class="floating-social-btn whatsapp-float" target="_blank" rel="noopener noreferrer">
+  <img src="https://i.ibb.co.com/0phzvpDg/PLPL-Lite-2026-05-01-230014.png" alt="WhatsApp">
+</a>
+
 </body>
 </html>
