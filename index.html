@@ -237,7 +237,7 @@
       100% { transform: rotate(360deg); }
     }
     
-    /* Bright Skeleton Loader - আরও উজ্জ্বল */
+    /* Bright Skeleton Loader */
     .skeleton-card {
       background: linear-gradient(110deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.08) 100%);
       background-size: 200% 100%;
@@ -312,6 +312,185 @@
       transition: color 0.2s;
     }
     .reset-link:hover { color: #f59e0b; }
+
+    /* ========== MODERN POPUP WITH COLORFUL GLOWING BORDER & 16:9 IMAGE, LARGER TELEGRAM BUTTON ========== */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 20000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .popup-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .popup-container {
+      position: relative;
+      width: 90%;
+      max-width: 480px;  /* Slightly increased for larger button */
+      margin: 1rem;
+      animation: fadeScaleUp 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    @keyframes fadeScaleUp {
+      0% {
+        opacity: 0;
+        transform: scale(0.92) translateY(12px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    /* Glass card with colorful animated rotating border (RGB glow) */
+    .popup-glass-card {
+      position: relative;
+      background: rgba(18, 22, 35, 0.88);
+      backdrop-filter: blur(24px);
+      border-radius: 38px;
+      overflow: hidden;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255,255,255,0.05);
+      transition: all 0.2s;
+    }
+    /* Colorful glowing border (gradient rotation) */
+    .popup-glass-card::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(135deg, #ff3366, #ff8c00, #ffd700, #33ccff, #ff3366);
+      background-size: 400% 400%;
+      border-radius: 40px;
+      z-index: -1;
+      opacity: 0.85;
+      animation: rgbGlowShift 5s ease infinite;
+      filter: blur(6px);
+    }
+    /* inner layer to keep content crisp */
+    .popup-glass-card::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      background: rgba(18, 22, 35, 0.88);
+      backdrop-filter: blur(24px);
+      border-radius: 36px;
+      z-index: 0;
+    }
+    .popup-content {
+      position: relative;
+      z-index: 2;
+      padding: 1.8rem 1.8rem 2.2rem;
+      text-align: center;
+    }
+    @keyframes rgbGlowShift {
+      0% { background-position: 0% 0%; filter: blur(6px); opacity: 0.7; }
+      25% { background-position: 50% 100%; filter: blur(8px); opacity: 0.9; }
+      50% { background-position: 100% 50%; filter: blur(6px); opacity: 0.8; }
+      75% { background-position: 50% 0%; filter: blur(7px); opacity: 0.9; }
+      100% { background-position: 0% 0%; filter: blur(6px); opacity: 0.7; }
+    }
+    /* 16:9 profile image */
+    .popup-image-wrapper {
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto 1rem auto;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+      aspect-ratio: 16 / 9;
+      background: #0f0f1a;
+      border: 1px solid rgba(245,158,11,0.4);
+    }
+    .popup-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .popup-image-wrapper img:hover {
+      transform: scale(1.02);
+    }
+    .join-text {
+      font-size: 1.65rem;
+      font-weight: 800;
+      background: linear-gradient(125deg, #ffffff, #fbbf24, #ffb347);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.2px;
+      margin: 0.5rem 0 1rem 0;
+      font-family: 'Inter', sans-serif;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    /* ----- ENLARGED TELEGRAM BUTTON (ZOOMED / BIGGER) ----- */
+    .telegram-btn-img {
+      cursor: pointer;
+      transition: transform 0.25s ease, filter 0.2s, box-shadow 0.2s;
+      max-width: 320px;      /* Increased from 260px to make it significantly larger */
+      width: 92%;            /* Increased relative width */
+      margin: 0.8rem auto 0;
+      display: block;
+      border-radius: 60px;   /* Slightly more rounded for larger button */
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.5);
+      filter: brightness(1.02);
+    }
+    .telegram-btn-img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.12);
+      box-shadow: 0 22px 36px rgba(0, 0, 0, 0.6);
+    }
+    .popup-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      width: 36px;
+      height: 36px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fde047;
+      cursor: pointer;
+      z-index: 15;
+      transition: all 0.2s;
+      border: 1px solid rgba(255, 215, 0, 0.6);
+      font-family: monospace;
+    }
+    .popup-close:hover {
+      background: #b91c1c;
+      color: white;
+      transform: scale(1.05);
+      border-color: #ffcc00;
+    }
+    @media (max-width: 520px) {
+      .join-text { font-size: 1.4rem; }
+      .popup-content { padding: 1.2rem 1rem 1.8rem; }
+      .popup-image-wrapper { max-width: 240px; }
+      /* On mobile, still large but slightly adapted */
+      .telegram-btn-img { max-width: 280px; width: 96%; }
+      .popup-close { width: 32px; height: 32px; font-size: 20px; top: 10px; right: 12px; }
+    }
+    @media (max-width: 400px) {
+      .join-text { font-size: 1.25rem; }
+      .popup-image-wrapper { max-width: 200px; }
+      .telegram-btn-img { max-width: 240px; width: 98%; }
+    }
   </style>
 </head>
 <body>
@@ -419,6 +598,23 @@
   </div>
 </a>
 
+<!-- ========== ENHANCED POPUP (16:9 Image, Colorful Glow Border, ZOOMED TELEGRAM BUTTON) ========== -->
+<div id="customPopupOverlay" class="popup-overlay">
+  <div class="popup-container">
+    <div class="popup-glass-card">
+      <div class="popup-close" id="closePopupBtn">✕</div>
+      <div class="popup-content">
+        <div class="popup-image-wrapper">
+          <img src="https://i.ibb.co.com/SwMk5Grw/ovi-hub.jpg" alt="ovi-hub" loading="lazy">
+        </div>
+        <div class="join-text">✨ Join our Telegram channel ✨</div>
+        <!-- Larger / Zoomed button: increased max-width and width -->
+        <img src="https://i.ibb.co.com/Y7gDk8Zx/pop-up.png" alt="Telegram" class="telegram-btn-img" id="telegramPopupBtn">
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getFirestore, collection, query, orderBy, getDocs, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -509,19 +705,16 @@
   closeModalBtn.addEventListener('click', () => modal.classList.remove('active'));
   modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('active'); });
   
-  // Optimized loading with bright spinner effect
   async function loadQuestionsOptimized() {
     try {
-      // Load first 20 items for instant display
       const initialQuery = query(collection(db, "questions"), orderBy("created_at", "desc"), limit(20));
       const initialSnap = await getDocs(initialQuery);
       const initialQuestions = [];
       initialSnap.forEach(doc => initialQuestions.push({ id: doc.id, ...doc.data() }));
       
       allQuestions = [...initialQuestions];
-      applyFilters(); // Show data immediately
+      applyFilters();
       
-      // Load remaining data in background
       const fullQuery = query(collection(db, "questions"), orderBy("created_at", "desc"));
       const fullSnap = await getDocs(fullQuery);
       const fullList = [];
@@ -531,7 +724,7 @@
       const newQuestions = fullList.filter(q => !existingIds.has(q.id));
       allQuestions = [...allQuestions, ...newQuestions];
       
-      applyFilters(); // Re-render with full data
+      applyFilters();
       
     } catch (err) {
       console.error("Firebase error:", err);
@@ -605,7 +798,6 @@
     container.innerHTML = '';
     container.appendChild(fragment);
     
-    // Event handlers
     document.querySelectorAll('.open-detail').forEach(btn => {
       btn.removeEventListener('click', detailHandler);
       btn.addEventListener('click', detailHandler);
@@ -641,7 +833,6 @@
     return str.replace(/[&<>]/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[m]; }); 
   }
   
-  // Announcements loader
   let announcementsLoaded = false;
   async function loadAnnouncements() {
     if (announcementsLoaded) return;
@@ -663,7 +854,6 @@
     } catch(e) { console.warn(e); }
   }
   
-  // Debounced search
   let debounceTimer;
   searchInput.addEventListener('input', () => {
     clearTimeout(debounceTimer);
@@ -683,10 +873,28 @@
     applyFilters();
   });
   
-  // Start
   loadQuestionsOptimized();
   loadAnnouncements();
   setInterval(() => { announcementsLoaded = false; loadAnnouncements(); }, 3600000);
+
+  // Enhanced popup controller (telegram button enlarged via CSS)
+  function initModernPopup() {
+    const overlay = document.getElementById('customPopupOverlay');
+    const closeBtn = document.getElementById('closePopupBtn');
+    const telegramBtn = document.getElementById('telegramPopupBtn');
+    if (!overlay) return;
+    setTimeout(() => {
+      overlay.classList.add('active');
+    }, 3000);
+    if (closeBtn) closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+    if (telegramBtn) telegramBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open('https://t.me/itz_ovi2', '_blank');
+    });
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('active'); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initModernPopup);
+  else initModernPopup();
 </script>
 </body>
 </html>
