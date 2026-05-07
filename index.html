@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Education Hub | It'z Ovi</title>
-  <meta name="description" content="Education From - It'z Ovi">
+  <meta name="description" content="Education Hub - স্কুল পর্যায়ের সকল শ্রেণির প্রশ্ন সংগ্রহ ও ডাউনলোড করুন।">
   
   <!-- Fonts + Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -101,11 +101,121 @@
       color: white;
     }
     
-    .filter-panel {
+    /* --- Filter Row: 1,2,3 side by side in single line --- */
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
       background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 28px;
+      padding: 0.75rem 1.5rem;
+      margin-bottom: 1rem;
+      align-items: center;
+      justify-content: center;
+    }
+    .filter-item {
+      flex: 1;
+      min-width: 160px;
+      position: relative;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 60px;
+      padding: 0.5rem 1rem 0.5rem 3rem;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .filter-item:hover {
+      border-color: rgba(245, 158, 11, 0.6);
+      background: rgba(0, 0, 0, 0.45);
+    }
+    .filter-number {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, #b91c1c, #ef4444);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .filter-label-text {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #fbbf24;
+      font-weight: 600;
+    }
+    .filter-selected-value {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: white;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .filter-item select {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 5;
+    }
+    .reset-btn-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.25rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) {
+      .filter-row { flex-direction: column; background: transparent; padding: 0; gap: 0.75rem; }
+      .filter-item { width: 100%; }
+      .reset-btn-wrap { margin-top: 0.5rem; }
+    }
+    
+    /* Banner Slider Styles */
+    .banner-slider-container {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #0f172a;
+      position: relative;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      margin-bottom: 1.5rem;
+    }
+    .banner-slider-wrapper {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    .banner-slide {
+      flex: 0 0 100%;
+      width: 100%;
+    }
+    .banner-slide img {
+      width: 100%;
+      height: auto;
+      max-height: 220px;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 16 / 6;
+    }
+    @media (min-width: 768px) {
+      .banner-slide img { max-height: 260px; aspect-ratio: 16 / 5; }
+    }
+    @media (min-width: 1024px) {
+      .banner-slide img { max-height: 300px; }
     }
     
     .premium-card {
@@ -221,7 +331,6 @@
       visibility: visible;
     }
     
-    /* Ultra Bright Loading Spinner */
     .gold-spinner {
       width: 48px;
       height: 48px;
@@ -237,7 +346,6 @@
       100% { transform: rotate(360deg); }
     }
     
-    /* Bright Skeleton Loader */
     .skeleton-card {
       background: linear-gradient(110deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.08) 100%);
       background-size: 200% 100%;
@@ -252,7 +360,6 @@
       100% { background-position: -200% 0; opacity: 0.5; }
     }
     
-    /* Floating Buttons */
     .floating-btn-wrapper {
       position: fixed;
       display: flex;
@@ -313,7 +420,7 @@
     }
     .reset-link:hover { color: #f59e0b; }
 
-    /* ========== MODERN POPUP WITH COLORFUL GLOWING BORDER & 16:9 IMAGE, LARGER TELEGRAM BUTTON ========== */
+    /* Popup Styles */
     .popup-overlay {
       position: fixed;
       top: 0;
@@ -336,21 +443,14 @@
     .popup-container {
       position: relative;
       width: 90%;
-      max-width: 480px;  /* Slightly increased for larger button */
+      max-width: 480px;
       margin: 1rem;
       animation: fadeScaleUp 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     }
     @keyframes fadeScaleUp {
-      0% {
-        opacity: 0;
-        transform: scale(0.92) translateY(12px);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+      0% { opacity: 0; transform: scale(0.92) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
-    /* Glass card with colorful animated rotating border (RGB glow) */
     .popup-glass-card {
       position: relative;
       background: rgba(18, 22, 35, 0.88);
@@ -358,9 +458,7 @@
       border-radius: 38px;
       overflow: hidden;
       box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255,255,255,0.05);
-      transition: all 0.2s;
     }
-    /* Colorful glowing border (gradient rotation) */
     .popup-glass-card::before {
       content: "";
       position: absolute;
@@ -376,7 +474,6 @@
       animation: rgbGlowShift 5s ease infinite;
       filter: blur(6px);
     }
-    /* inner layer to keep content crisp */
     .popup-glass-card::after {
       content: "";
       position: absolute;
@@ -399,7 +496,6 @@
       75% { background-position: 50% 0%; filter: blur(7px); opacity: 0.9; }
       100% { background-position: 0% 0%; filter: blur(6px); opacity: 0.7; }
     }
-    /* 16:9 profile image */
     .popup-image-wrapper {
       width: 100%;
       max-width: 280px;
@@ -416,10 +512,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.3s ease;
-    }
-    .popup-image-wrapper img:hover {
-      transform: scale(1.02);
     }
     .join-text {
       font-size: 1.65rem;
@@ -431,25 +523,20 @@
       color: transparent;
       letter-spacing: -0.2px;
       margin: 0.5rem 0 1rem 0;
-      font-family: 'Inter', sans-serif;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
-    /* ----- ENLARGED TELEGRAM BUTTON (ZOOMED / BIGGER) ----- */
     .telegram-btn-img {
       cursor: pointer;
       transition: transform 0.25s ease, filter 0.2s, box-shadow 0.2s;
-      max-width: 320px;      /* Increased from 260px to make it significantly larger */
-      width: 92%;            /* Increased relative width */
+      max-width: 320px;
+      width: 92%;
       margin: 0.8rem auto 0;
       display: block;
-      border-radius: 60px;   /* Slightly more rounded for larger button */
+      border-radius: 60px;
       box-shadow: 0 16px 28px rgba(0, 0, 0, 0.5);
-      filter: brightness(1.02);
     }
     .telegram-btn-img:hover {
       transform: scale(1.05);
       filter: brightness(1.12);
-      box-shadow: 0 22px 36px rgba(0, 0, 0, 0.6);
     }
     .popup-close {
       position: absolute;
@@ -468,28 +555,11 @@
       color: #fde047;
       cursor: pointer;
       z-index: 15;
-      transition: all 0.2s;
       border: 1px solid rgba(255, 215, 0, 0.6);
-      font-family: monospace;
     }
     .popup-close:hover {
       background: #b91c1c;
       color: white;
-      transform: scale(1.05);
-      border-color: #ffcc00;
-    }
-    @media (max-width: 520px) {
-      .join-text { font-size: 1.4rem; }
-      .popup-content { padding: 1.2rem 1rem 1.8rem; }
-      .popup-image-wrapper { max-width: 240px; }
-      /* On mobile, still large but slightly adapted */
-      .telegram-btn-img { max-width: 280px; width: 96%; }
-      .popup-close { width: 32px; height: 32px; font-size: 20px; top: 10px; right: 12px; }
-    }
-    @media (max-width: 400px) {
-      .join-text { font-size: 1.25rem; }
-      .popup-image-wrapper { max-width: 200px; }
-      .telegram-btn-img { max-width: 240px; width: 98%; }
     }
   </style>
 </head>
@@ -521,10 +591,25 @@
   </div>
 </div>
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <div class="filter-panel p-5 mb-8 rounded-2xl">
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <select id="filterClass" class="rounded-lg px-4 py-2.5 glass-input">
+<!-- Banner Slider - 2 images sliding left every 2 sec -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5">
+  <div class="banner-slider-container">
+    <div class="banner-slider-wrapper" id="bannerSlider">
+      <div class="banner-slide"><img src="https://i.ibb.co.com/GfqDxT1M/PLPL-Lite-2026-05-06-214901.jpg" alt="Banner 1"></div>
+      <div class="banner-slide"><img src="https://i.ibb.co.com/JwbCsTrJ/ovibd-com.jpg" alt="Banner 2"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN FILTERS: 1 2 3 SIDE BY SIDE IN SINGLE ROW (All Classes > All Categories > All Exams) -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+  <div class="filter-row">
+    <!-- Filter 1: All Classes -->
+    <div class="filter-item">
+      <div class="filter-number">1</div>
+      <div class="filter-label-text"><i class="fas fa-layer-group mr-1"></i> শ্রেণি</div>
+      <div class="filter-selected-value" id="selectedClassLabel">All Classes</div>
+      <select id="filterClass">
         <option value="">All Classes</option>
         <option value="৬ম">Class 6</option>
         <option value="৭ম">Class 7</option>
@@ -532,7 +617,14 @@
         <option value="৯ম">Class 9</option>
         <option value="১০ম">Class 10</option>
       </select>
-      <select id="englishCategory" class="rounded-lg px-4 py-2.5 glass-input">
+    </div>
+
+    <!-- Filter 2: All Categories -->
+    <div class="filter-item">
+      <div class="filter-number">2</div>
+      <div class="filter-label-text"><i class="fas fa-tags mr-1"></i> বিভাগ</div>
+      <div class="filter-selected-value" id="selectedCategoryLabel">All Categories</div>
+      <select id="englishCategory">
         <option value="">All Categories</option>
         <option value="Letter">📝 Letter</option>
         <option value="Composition">✍️ Composition</option>
@@ -545,19 +637,27 @@
         <option value="Report">📰 Report</option>
         <option value="Email">✉️ Email</option>
       </select>
-      <select id="filterExam" class="rounded-lg px-4 py-2.5 glass-input">
+    </div>
+
+    <!-- Filter 3: All Exams -->
+    <div class="filter-item">
+      <div class="filter-number">3</div>
+      <div class="filter-label-text"><i class="fas fa-calendar-alt mr-1"></i> পরীক্ষা</div>
+      <div class="filter-selected-value" id="selectedExamLabel">All Exams</div>
+      <select id="filterExam">
         <option value="">All Exams</option>
         <option value="অর্ধবার্ষিক">Half-Yearly</option>
         <option value="বার্ষিক">Annual</option>
         <option value="মডেল টেস্ট">Model Test</option>
       </select>
     </div>
-    <div class="flex justify-end mt-4">
-      <button id="resetFilterBtn" class="reset-link text-sm flex items-center gap-1"><i class="fas fa-undo-alt mr-1"></i> Reset</button>
-    </div>
+  </div>
+  
+  <div class="reset-btn-wrap">
+    <button id="resetFilterBtn" class="reset-link text-sm flex items-center gap-2 px-4 py-1.5 rounded-full hover:bg-white/5 transition"><i class="fas fa-undo-alt mr-1"></i> Reset All Filters</button>
   </div>
 
-  <!-- Skeleton Loader (Bright) -->
+  <!-- Skeleton Loader -->
   <div id="skeletonLoader" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>
   </div>
@@ -571,7 +671,6 @@
 </footer>
 
 <div id="toastMessage" class="toast-notify"></div>
-
 <div id="descriptionModal" class="modal-overlay">
   <div class="modal-container">
     <div class="modal-header flex justify-between items-center">
@@ -585,20 +684,19 @@
   </div>
 </div>
 
-<!-- Floating Buttons -->
+<!-- Floating Buttons (unchanged) -->
 <a href="https://t.me/itz_ovi1" target="_blank" class="floating-btn-wrapper telegram-float" style="text-decoration: none;">
   <div class="floating-social-btn">
     <img src="https://i.ibb.co.com/GrS9Zf1/PLPL-Lite-2026-05-01-225753.png" alt="Telegram">
   </div>
 </a>
-
 <a href="https://wa.me/message/A5BTDDK3ETGFG1" target="_blank" class="floating-btn-wrapper whatsapp-float" style="text-decoration: none;">
   <div class="floating-social-btn">
     <img src="https://i.ibb.co.com/0phzvpDg/PLPL-Lite-2026-05-01-230014.png" alt="WhatsApp">
   </div>
 </a>
 
-<!-- ========== ENHANCED POPUP (16:9 Image, Colorful Glow Border, ZOOMED TELEGRAM BUTTON) ========== -->
+<!-- Popup -->
 <div id="customPopupOverlay" class="popup-overlay">
   <div class="popup-container">
     <div class="popup-glass-card">
@@ -608,7 +706,6 @@
           <img src="https://i.ibb.co.com/SwMk5Grw/ovi-hub.jpg" alt="ovi-hub" loading="lazy">
         </div>
         <div class="join-text">✨ Join our Telegram channel ✨</div>
-        <!-- Larger / Zoomed button: increased max-width and width -->
         <img src="https://i.ibb.co.com/Y7gDk8Zx/pop-up.png" alt="Telegram" class="telegram-btn-img" id="telegramPopupBtn">
       </div>
     </div>
@@ -643,24 +740,24 @@
   const resetBtn = document.getElementById('resetFilterBtn');
   const searchInput = document.getElementById('globalSearchInput');
   
+  const classLabel = document.getElementById('selectedClassLabel');
+  const catLabel = document.getElementById('selectedCategoryLabel');
+  const examLabel = document.getElementById('selectedExamLabel');
+  
   const modal = document.getElementById('descriptionModal');
   const modalBody = document.getElementById('modalBodyContent');
   const closeModalBtn = document.querySelector('.close-modal');
   const copyBtn = document.getElementById('copyFullTextBtn');
   let currentText = "";
   
-  let toastTimeout = null;
   function showToast(msg) {
     const toast = document.getElementById('toastMessage');
-    if (toastTimeout) clearTimeout(toastTimeout);
+    if (window.toastTimeout) clearTimeout(window.toastTimeout);
     toast.innerText = msg;
     toast.classList.remove('show');
     void toast.offsetWidth;
     toast.classList.add('show');
-    toastTimeout = setTimeout(() => {
-      toast.classList.remove('show');
-      toastTimeout = null;
-    }, 2000);
+    window.toastTimeout = setTimeout(() => toast.classList.remove('show'), 2000);
   }
   
   function openModal(question) {
@@ -711,7 +808,6 @@
       const initialSnap = await getDocs(initialQuery);
       const initialQuestions = [];
       initialSnap.forEach(doc => initialQuestions.push({ id: doc.id, ...doc.data() }));
-      
       allQuestions = [...initialQuestions];
       applyFilters();
       
@@ -719,19 +815,38 @@
       const fullSnap = await getDocs(fullQuery);
       const fullList = [];
       fullSnap.forEach(doc => fullList.push({ id: doc.id, ...doc.data() }));
-      
       const existingIds = new Set(allQuestions.map(q => q.id));
       const newQuestions = fullList.filter(q => !existingIds.has(q.id));
       allQuestions = [...allQuestions, ...newQuestions];
-      
       applyFilters();
-      
     } catch (err) {
-      console.error("Firebase error:", err);
-      showToast("Failed to load data, please refresh");
+      console.error(err);
+      showToast("Failed to load data");
       if(skeletonLoader) skeletonLoader.classList.add('hidden');
       container.innerHTML = '<div class="col-span-full text-center text-red-400 p-6">Error loading data</div>';
       container.classList.remove('hidden');
+    }
+  }
+  
+  function updateFilterLabels() {
+    if(classLabel) {
+      let val = filterClass.value;
+      if(val === "৬ম") classLabel.innerText = "Class 6";
+      else if(val === "৭ম") classLabel.innerText = "Class 7";
+      else if(val === "৮ম") classLabel.innerText = "Class 8";
+      else if(val === "৯ম") classLabel.innerText = "Class 9";
+      else if(val === "১০ম") classLabel.innerText = "Class 10";
+      else classLabel.innerText = "All Classes";
+    }
+    if(catLabel) {
+      let selectedOpt = filterCat.options[filterCat.selectedIndex];
+      let displayCat = selectedOpt ? (selectedOpt.text || "All Categories") : "All Categories";
+      catLabel.innerText = displayCat.length > 22 ? displayCat.substring(0,20)+".." : displayCat;
+    }
+    if(examLabel) {
+      let selectedOpt = filterExam.options[filterExam.selectedIndex];
+      let displayExam = selectedOpt ? (selectedOpt.text || "All Exams") : "All Exams";
+      examLabel.innerText = displayExam;
     }
   }
   
@@ -753,6 +868,7 @@
       }
       return true;
     });
+    updateFilterLabels();
     renderQuestions();
   }
   
@@ -769,11 +885,9 @@
     container.classList.remove('hidden');
     
     const fragment = document.createDocumentFragment();
-    
     filteredQuestions.forEach(q => {
       const imgHtml = q.image_url ? `<img src="${q.image_url}" class="w-full h-44 object-cover" loading="lazy" onerror="this.src='https://placehold.co/600x400?text=No+Image'">` : 
         `<div class="h-32 bg-black/20 flex items-center justify-center"><i class="fas fa-file-alt text-3xl text-gray-400"></i></div>`;
-      
       const card = document.createElement('div');
       card.className = 'premium-card overflow-hidden card-fade';
       card.innerHTML = `
@@ -794,7 +908,6 @@
       `;
       fragment.appendChild(card);
     });
-    
     container.innerHTML = '';
     container.appendChild(fragment);
     
@@ -802,7 +915,6 @@
       btn.removeEventListener('click', detailHandler);
       btn.addEventListener('click', detailHandler);
     });
-    
     document.querySelectorAll('.download-btn').forEach(btn => {
       btn.removeEventListener('click', downloadHandler);
       btn.addEventListener('click', downloadHandler);
@@ -846,20 +958,28 @@
       const ticker = document.getElementById('tickerContent');
       if(ticker) {
         ticker.innerHTML = doubled.map(t => `<div class="ticker-item"><i class="fas fa-bullhorn"></i><span>${escapeHtmlSimple(t)}</span></div>`).join('');
-        const contentWidth = ticker.scrollWidth;
-        const duration = Math.max(20, Math.min(40, contentWidth / 70));
+        const duration = Math.max(20, Math.min(40, ticker.scrollWidth / 70));
         ticker.style.animationDuration = `${duration}s`;
       }
       announcementsLoaded = true;
     } catch(e) { console.warn(e); }
   }
   
+  // Banner Slider (2 seconds)
+  let currentSlide = 0;
+  const sliderWrapper = document.getElementById('bannerSlider');
+  const totalSlides = document.querySelectorAll('.banner-slide').length;
+  function nextSlide() {
+    if (!sliderWrapper) return;
+    currentSlide = (currentSlide + 1) % totalSlides;
+    sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+  if (totalSlides > 1) setInterval(nextSlide, 2000);
+  
   let debounceTimer;
   searchInput.addEventListener('input', () => {
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      applyFilters();
-    }, 200);
+    debounceTimer = setTimeout(() => applyFilters(), 200);
   });
   
   filterClass.addEventListener('change', () => applyFilters());
@@ -876,16 +996,13 @@
   loadQuestionsOptimized();
   loadAnnouncements();
   setInterval(() => { announcementsLoaded = false; loadAnnouncements(); }, 3600000);
-
-  // Enhanced popup controller (telegram button enlarged via CSS)
+  
   function initModernPopup() {
     const overlay = document.getElementById('customPopupOverlay');
     const closeBtn = document.getElementById('closePopupBtn');
     const telegramBtn = document.getElementById('telegramPopupBtn');
     if (!overlay) return;
-    setTimeout(() => {
-      overlay.classList.add('active');
-    }, 3000);
+    setTimeout(() => overlay.classList.add('active'), 3000);
     if (closeBtn) closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
     if (telegramBtn) telegramBtn.addEventListener('click', (e) => {
       e.preventDefault();
