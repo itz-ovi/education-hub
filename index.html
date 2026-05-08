@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Education Hub | It'z Ovi</title>
-  <meta name="description" content="Education Hub - স্কুল পর্যায়ের সকল শ্রেণির প্রশ্ন সংগ্রহ ও ডাউনলোড করুন।">
+  <meta name="description" content="Education Hub - From It'z Ovi">
   
   <!-- Fonts + Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -101,42 +101,46 @@
       color: white;
     }
     
-    /* --- Filter Row: 1,2,3 side by side in single line --- */
+    /* --- FILTER ROW: Centered with flex, both pills in middle --- */
     .filter-row {
       display: flex;
+      flex-direction: row;
       flex-wrap: wrap;
-      gap: 1rem;
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 28px;
-      padding: 0.75rem 1.5rem;
+      gap: 1.25rem;
+      background: transparent;
+      border: none;
+      backdrop-filter: none;
+      border-radius: 0;
+      padding: 0;
       margin-bottom: 1rem;
       align-items: center;
-      justify-content: center;
+      justify-content: center;  /* CENTERED both pills */
     }
     .filter-item {
-      flex: 1;
-      min-width: 160px;
+      flex: 0 0 auto;
+      min-width: 200px;
       position: relative;
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 60px;
-      padding: 0.5rem 1rem 0.5rem 3rem;
-      border: 1px solid rgba(255, 215, 0, 0.2);
+      padding: 0.5rem 1.2rem 0.5rem 3rem;
+      border: 1px solid rgba(255, 215, 0, 0.3);
       transition: all 0.2s;
       cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .filter-item:hover {
-      border-color: rgba(245, 158, 11, 0.6);
-      background: rgba(0, 0, 0, 0.45);
+      border-color: rgba(245, 158, 11, 0.8);
+      background: rgba(0, 0, 0, 0.6);
+      transform: translateY(-1px);
     }
     .filter-number {
       position: absolute;
       left: 8px;
       top: 50%;
       transform: translateY(-50%);
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       background: linear-gradient(135deg, #b91c1c, #ef4444);
       border-radius: 30px;
       display: flex;
@@ -148,7 +152,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     .filter-label-text {
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: #fbbf24;
@@ -156,7 +160,7 @@
     }
     .filter-selected-value {
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: white;
       white-space: nowrap;
       overflow: hidden;
@@ -174,14 +178,25 @@
     }
     .reset-btn-wrap {
       display: flex;
-      justify-content: flex-end;
-      margin-top: 0.25rem;
-      margin-bottom: 1rem;
+      justify-content: center;  /* center reset button */
+      margin-top: 0.5rem;
+      margin-bottom: 1.2rem;
     }
-    @media (max-width: 768px) {
-      .filter-row { flex-direction: column; background: transparent; padding: 0; gap: 0.75rem; }
-      .filter-item { width: 100%; }
-      .reset-btn-wrap { margin-top: 0.5rem; }
+    
+    /* Mobile: still centered row but wrap if needed */
+    @media (max-width: 640px) {
+      .filter-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        justify-content: center;
+      }
+      .filter-item {
+        min-width: 170px;
+      }
+      .reset-btn-wrap {
+        justify-content: center;
+      }
     }
     
     /* Banner Slider Styles */
@@ -417,8 +432,12 @@
     .reset-link {
       color: #94a3b8;
       transition: color 0.2s;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+      border-radius: 40px;
+      padding: 6px 18px;
     }
-    .reset-link:hover { color: #f59e0b; }
+    .reset-link:hover { color: #f59e0b; background: rgba(0,0,0,0.5); }
 
     /* Popup Styles */
     .popup-overlay {
@@ -591,7 +610,7 @@
   </div>
 </div>
 
-<!-- Banner Slider - 2 images sliding left every 2 sec -->
+<!-- Banner Slider -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5">
   <div class="banner-slider-container">
     <div class="banner-slider-wrapper" id="bannerSlider">
@@ -601,7 +620,7 @@
   </div>
 </div>
 
-<!-- MAIN FILTERS: 1 2 3 SIDE BY SIDE IN SINGLE ROW (All Classes > All Categories > All Exams) -->
+<!-- FILTER ROW: Only Class & Category, now perfectly centered -->
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
   <div class="filter-row">
     <!-- Filter 1: All Classes -->
@@ -638,23 +657,10 @@
         <option value="Email">✉️ Email</option>
       </select>
     </div>
-
-    <!-- Filter 3: All Exams -->
-    <div class="filter-item">
-      <div class="filter-number">3</div>
-      <div class="filter-label-text"><i class="fas fa-calendar-alt mr-1"></i> পরীক্ষা</div>
-      <div class="filter-selected-value" id="selectedExamLabel">All Exams</div>
-      <select id="filterExam">
-        <option value="">All Exams</option>
-        <option value="অর্ধবার্ষিক">Half-Yearly</option>
-        <option value="বার্ষিক">Annual</option>
-        <option value="মডেল টেস্ট">Model Test</option>
-      </select>
-    </div>
   </div>
   
   <div class="reset-btn-wrap">
-    <button id="resetFilterBtn" class="reset-link text-sm flex items-center gap-2 px-4 py-1.5 rounded-full hover:bg-white/5 transition"><i class="fas fa-undo-alt mr-1"></i> Reset All Filters</button>
+    <button id="resetFilterBtn" class="reset-link text-sm flex items-center gap-2 transition"><i class="fas fa-undo-alt mr-1"></i> Reset All Filters</button>
   </div>
 
   <!-- Skeleton Loader -->
@@ -684,7 +690,7 @@
   </div>
 </div>
 
-<!-- Floating Buttons (unchanged) -->
+<!-- Floating Buttons -->
 <a href="https://t.me/itz_ovi1" target="_blank" class="floating-btn-wrapper telegram-float" style="text-decoration: none;">
   <div class="floating-social-btn">
     <img src="https://i.ibb.co.com/GrS9Zf1/PLPL-Lite-2026-05-01-225753.png" alt="Telegram">
@@ -736,13 +742,11 @@
   const emptyState = document.getElementById('emptyState');
   const filterClass = document.getElementById('filterClass');
   const filterCat = document.getElementById('englishCategory');
-  const filterExam = document.getElementById('filterExam');
   const resetBtn = document.getElementById('resetFilterBtn');
   const searchInput = document.getElementById('globalSearchInput');
   
   const classLabel = document.getElementById('selectedClassLabel');
   const catLabel = document.getElementById('selectedCategoryLabel');
-  const examLabel = document.getElementById('selectedExamLabel');
   
   const modal = document.getElementById('descriptionModal');
   const modalBody = document.getElementById('modalBodyContent');
@@ -843,23 +847,16 @@
       let displayCat = selectedOpt ? (selectedOpt.text || "All Categories") : "All Categories";
       catLabel.innerText = displayCat.length > 22 ? displayCat.substring(0,20)+".." : displayCat;
     }
-    if(examLabel) {
-      let selectedOpt = filterExam.options[filterExam.selectedIndex];
-      let displayExam = selectedOpt ? (selectedOpt.text || "All Exams") : "All Exams";
-      examLabel.innerText = displayExam;
-    }
   }
   
   function applyFilters() {
     const classVal = filterClass.value;
     const catVal = filterCat.value;
-    const examVal = filterExam.value;
     const searchVal = searchInput.value.trim().toLowerCase();
     
     filteredQuestions = allQuestions.filter(q => {
       if (classVal && q.class_level !== classVal) return false;
       if (catVal && (q.english_category || q.subject || "") !== catVal) return false;
-      if (examVal && q.exam_type !== examVal) return false;
       if (searchVal) {
         const titleMatch = q.title?.toLowerCase().includes(searchVal);
         const catMatch = (q.english_category || q.subject || "").toLowerCase().includes(searchVal);
@@ -965,7 +962,7 @@
     } catch(e) { console.warn(e); }
   }
   
-  // Banner Slider (2 seconds)
+  // Banner Slider 2 seconds
   let currentSlide = 0;
   const sliderWrapper = document.getElementById('bannerSlider');
   const totalSlides = document.querySelectorAll('.banner-slide').length;
@@ -984,11 +981,9 @@
   
   filterClass.addEventListener('change', () => applyFilters());
   filterCat.addEventListener('change', () => applyFilters());
-  filterExam.addEventListener('change', () => applyFilters());
   resetBtn.addEventListener('click', () => {
     filterClass.value = '';
     filterCat.value = '';
-    filterExam.value = '';
     searchInput.value = '';
     applyFilters();
   });
